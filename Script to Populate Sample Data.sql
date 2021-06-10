@@ -19,6 +19,8 @@ INSERT INTO department_master VALUES (10, 'ADMIN', 'Administration','Admin',LOCA
 
 COMMIT;
 
+--------------------------------------------------------------------------------------------------
+
 DROP TABLE dept_tasks;
 
 CREATE TABLE dept_tasks (task_id NUMBER  PRIMARY KEY, 
@@ -112,3 +114,22 @@ INSERT INTO dept_tasks VALUES (58, 'Task E', 10,'Admin',LOCALTIMESTAMP);
 INSERT INTO dept_tasks VALUES (59, 'Task F', 10,'Admin',LOCALTIMESTAMP);
 
 COMMIT;
+
+-------------------------------------------------------------------------------------
+
+WITH final_data AS
+  (SELECT dt.dept_id,
+    count(*) total_tasks
+  FROM dept_tasks dt
+  GROUP BY dt.dept_id
+  )
+SELECT dept.dept_id heat_map_id, -- Primary key of the Table
+       dept.dept_name heatmap_tootltip,
+       apex_string.get_initials(dept.dept_code,6) heatmap_label, -- Initials
+       apex_util.prepare_url ('f?p='||:app_id||':1:'||:app_session||':::1:P1_ID:'||1) heatmap_link,
+       fd.total_tasks heatmap_value -- Note: It must be a number field
+  FROM department_master dept,
+       final_data fd
+ WHERE 1          = 1
+   AND dept.dept_id = fd.dept_id
+ ORDER BY fd.total_tasks DESC;
