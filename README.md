@@ -2,6 +2,8 @@
 
 It's a Heat Map (or heatmap) Report Plug-In. It's a representation of data where values are depicted by color. It makes the visualize of complex data easy and understand it at a glance.
 
+This has been inspired by apex.oracle.com. Special thanks to Oracle APEX Product Development team, who brought this solution.
+
 Demo Application: https://apex.oracle.com/pls/apex/f?p=113036:9999::BRANCH_TO_PAGE_ACCEPT::9999:P9999_APP_PAGE_REDIRECT:36
 
 # Prerequisite:
