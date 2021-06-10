@@ -16,7 +16,7 @@ Export plugin file **"region_type_plugin_orclking_heatmap_report.sql"** from Sou
 
 # Steps to Achieve:
 
-**Step 1:** Create required objects (table, sequence, trigger) and populate sample data into a table. (As per your requirements)
+**Step 1:** Export a script **"Script to Populate Sample Data.sql"** from directory and compile it in your schema.
 
 **Step 2:** Create a new blank page.
 
@@ -24,42 +24,74 @@ Export plugin file **"region_type_plugin_orclking_heatmap_report.sql"** from Sou
 
 **Navigation:** Shared Components ==> Plug-ins ==> Import
 
-![image](https://user-images.githubusercontent.com/85283603/120700684-fe0e9480-c4c2-11eb-8307-733c2d5f31a9.png)
-
+![image](https://user-images.githubusercontent.com/85283603/121553504-60ffae80-ca22-11eb-9f7c-6650009226df.png)
 
 Plugin will be listed under plug-ins bucket after successful installation.
 
-![image](https://user-images.githubusercontent.com/85283603/120700299-8c364b00-c4c2-11eb-8934-bb59163ffd0f.png)
-
+![image](https://user-images.githubusercontent.com/85283603/121553428-4f1e0b80-ca22-11eb-886e-2f9dc88c3635.png)
 
 **Step 4:** Create a region to the page. Change region type to **Heat Map Report [Plug-In]**.
 
-![image](https://user-images.githubusercontent.com/85283603/120700160-5b561600-c4c2-11eb-91e8-9e39af042775.png)
+![image](https://user-images.githubusercontent.com/85283603/121554230-09157780-ca23-11eb-870e-2c6616f9cdb0.png)
 
 **Step 5:**  Construct Oracle SQL query and copy and paste it in region SQL Query section.
 
-![image](https://user-images.githubusercontent.com/85283603/120698476-2d6fd200-c4c0-11eb-93c8-5b7db96ccd55.png)
+![image](https://user-images.githubusercontent.com/85283603/121554183-f9962e80-ca22-11eb-9710-563c1c07e7a0.png)
 
-**Query Format:**
+**Query Template:**
 
-       SELECT 1 heat_map_id -- Primary key of the Table 
+    SELECT 1 heat_map_id, -- Primary key of the Table
+       
+           'Product A' heatmap_tootltip,
+              
+            apex_string.get_initials('Product A',6) heatmap_label, -- Initials
+              
+            apex_util.prepare_url ('f?p='||:app_id||':1:'||:app_session||':::1:P1_ID:'||1) heatmap_link,
+              
+            1000 heatmap_value -- Note: It must be a number field
+              
+      FROM oracle_table
+              
+     WHERE 1 = 1;
+        
+       
+**Sample Query to Render a Report:**
 
-              'Product A' heatmap_tootltip,
+Note: Export a script **"Script to Populate Sample Data.sql"** from directory and compile it in your schema.
 
-               apex_string.get_initials('Product A',4) heatmap_label, -- Initials
+    WITH final_data AS
+        
+    (SELECT dt.dept_id,
+         
+            count(*) total_tasks
+           
+      FROM dept_tasks dt
 
-               apex_util.prepare_url ('f?p='||:APP_ID||':1:'||:APP_SESSION||':::1:P1_ID:'||1) heatmap_link,
-
-               1000 heatmap_value -- Note: It must be a number field
-
-       FROM   oracle_table 
-
-       WHERE  1 = 1;
-
+     GROUP BY dt.dept_id
+     )
+       SELECT dept.dept_id heat_map_id, -- Primary key of the Table
+       
+              dept.dept_name heatmap_tootltip,
+              
+              apex_string.get_initials(dept.dept_code,6) heatmap_label, -- Initials
+              
+              apex_util.prepare_url ('f?p='||:app_id||':1:'||:app_session||':::1:P1_ID:'||1) heatmap_link,
+              
+              fd.total_tasks heatmap_value -- Note: It must be a number field
+              
+         FROM department_master dept,
+         
+              final_data fd
+              
+        WHERE 1 = 1
+        
+          AND dept.dept_id = fd.dept_id
+          
+        ORDER BY fd.total_tasks DESC;
+ 
  **Output:** Then you output would display like this,
 
-![image](https://user-images.githubusercontent.com/85283603/120699282-40cf6d00-c4c1-11eb-8376-1981610462ac.png)
-
+![image](https://user-images.githubusercontent.com/85283603/121553108-0c5c3380-ca22-11eb-9329-f30d4ade34fb.png)
   
 That's it.
 
