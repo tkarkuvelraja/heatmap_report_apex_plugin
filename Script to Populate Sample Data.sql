@@ -15,7 +15,6 @@ INSERT INTO department_master VALUES (6, 'LEGAL', 'Case Management System','Admi
 INSERT INTO department_master VALUES (7, 'FIN', 'Finance','Admin',LOCALTIMESTAMP);
 INSERT INTO department_master VALUES (8, 'SCM', 'Procurment Management','Admin',LOCALTIMESTAMP);
 INSERT INTO department_master VALUES (9, 'HR', 'Human Resources','Admin',LOCALTIMESTAMP);
-INSERT INTO department_master VALUES (10, 'ADMIN', 'Administration','Admin',LOCALTIMESTAMP);
 
 COMMIT;
 
