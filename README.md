@@ -57,7 +57,7 @@ Plugin will be listed under plug-ins bucket after successful installation.
        
 **Sample Query to Render a Report:**
 
-Note: Export a script **"Script to Populate Sample Data.sql"** from directory and compile it in your schema.
+**Note:** Populate sample data by exporting a script **"Script to Populate Sample Data.sql"** from directory and compile it in your schema.
 
     WITH final_data AS
         
