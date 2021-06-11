@@ -28,7 +28,7 @@
         "internalName" : "ORCLKING.HEATMAP.REPORT",
         "type" : "region",
         "demo" : "https://apex.oracle.com/pls/apex/f?p=113036:9999::BRANCH_TO_PAGE_ACCEPT::9999:P9999_APP_PAGE_REDIRECT:36",
-        "previewImage" : "https://raw.githubusercontent.com/tkarkuvelraja/heatmap_report_apex_plugin/master/HeatMapReport.gif"
+        "previewImage" : "https://raw.githubusercontent.com/tkarkuvelraja/heatmap_report_apex_plugin/master/HeatMapReportPreview.gif"
       }
     }
   }
