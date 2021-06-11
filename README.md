@@ -93,7 +93,7 @@ Plugin will be listed under plug-ins bucket after successful installation.
  
  **Output:** Then you output would display like this,
 
-![image](https://user-images.githubusercontent.com/85283603/121553108-0c5c3380-ca22-11eb-9329-f30d4ade34fb.png)
+![image](https://user-images.githubusercontent.com/85283603/121629801-03547c00-ca8d-11eb-8e47-ede1c7c31648.png)
   
 That's it.
 
