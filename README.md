@@ -52,7 +52,7 @@ Plugin will be listed under plug-ins bucket after successful installation.
               
             1000 heatmap_value -- Note: It must be a number field
               
-      FROM oracle_table
+      FROM dual
               
      WHERE 1 = 1;
         
